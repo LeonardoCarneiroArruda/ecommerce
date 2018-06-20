@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -30,15 +30,15 @@
   </div>
   
    <div class="help-block text-center">
-     Olá {$name}, digite uma nova senha:
+     Olá <?php echo htmlspecialchars( $name, ENT_COMPAT, 'UTF-8', FALSE ); ?>, digite uma nova senha:
     </div>
 
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
 
     <!-- lockscreen credentials (contains the form) -->
-    <form  action="/ecommerce/admin/forgot/reset" method="post">
-      <input type="hidden" name="code" value="{$code}">
+    <form  action="/admin/forgot/reset" method="post">
+      <input type="hidden" name="code" value="<?php echo htmlspecialchars( $code, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
       <div class="input-group">
         <input type="password" class="form-control" placeholder="Digite a nova senha" name="password">
         <div class="input-group-btn">
