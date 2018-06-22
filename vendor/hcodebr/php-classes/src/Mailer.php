@@ -70,7 +70,7 @@ class Mailer {
 		$this->mail->setFrom(Mailer::USERNAME, Mailer::NAME_FROM);
 
 		//Set an alternative reply-to address
-		$this->mail->addReplyTo('replyto@example.com', 'First Last');
+		//$this->mail->addReplyTo('replyto@example.com', 'First Last');
 
 		//Set who the message is to be sent to
 		$this->mail->addAddress($toAddress, $toName);

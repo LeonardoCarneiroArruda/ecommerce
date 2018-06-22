@@ -150,7 +150,7 @@ class User extends Model{
 		);
 
 		if (count($results) === 0) {
-			throw new \Exception("Não foi possivel recuperar a senha", 1);
+			throw new \Exception("Não foi possivel recuperar a senha");
 			
 		}
 		else {
@@ -158,11 +158,11 @@ class User extends Model{
 
 			$results2 = $sql->select("CALL sp_userspasswordsrecoveries_create(:iduser, :desip)", array(
 				":iduser"=>$data["iduser"],
-				"desip"=>$_SERVER["REMOTE_ADDR"]
+				":desip"=>$_SERVER["REMOTE_ADDR"]
 			));
 
 			if (count($results2) === 0) {
-				throw new \Exception("Não foi possivel recuperar a senha", 1);
+				throw new \Exception("Não foi possivel recuperar a senha");
 				
 			}
 			else {
@@ -171,11 +171,10 @@ class User extends Model{
 				$iv = random_bytes(openssl_cipher_iv_length('aes-256-cbc'));
             	$code = openssl_encrypt($dataRecovery['idrecovery'], 'aes-256-cbc', User::SECRET, 0, $iv);
              	$result = base64_encode($iv.$code);
-				if ($inadmin === true) {
+			
                  $link = "localhost/ecommerce/admin/forgot/reset?code=$result";
-            	} else {
-                 $link = "localhost/ecommerce/forgot/reset?code=$result";
-             	} 
+            
+     
 
 				$mailer = new Mailer($data["desemail"], $data["desperson"], "Redefinir senha da Hcode", "forgot", 
 					array(
@@ -195,6 +194,7 @@ class User extends Model{
      $code = mb_substr($result, openssl_cipher_iv_length('aes-256-cbc'), null, '8bit');
      $iv = mb_substr($result, 0, openssl_cipher_iv_length('aes-256-cbc'), '8bit');;
      $idrecovery = openssl_decrypt($code, 'aes-256-cbc', User::SECRET, 0, $iv);
+    
      $sql = new Sql();
 
      $results = $sql->select("

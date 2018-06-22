@@ -7,13 +7,13 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="/ecommerce/res/admin/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/res/admin/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/ecommerce/res/admin/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/res/admin/dist/css/AdminLTE.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,31 +26,16 @@
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="/ecommerce/res/admin/index2.html"><b>Admin</b>LTE</a>
+    <a href="/res/admin/index2.html"><b>Admin</b>LTE</a>
   </div>
-  
-   <div class="help-block text-center">
-     Olá <?php echo htmlspecialchars( $name, ENT_COMPAT, 'UTF-8', FALSE ); ?>, digite uma nova senha:
-    </div>
 
-  <!-- START LOCK SCREEN ITEM -->
-  <div class="lockscreen-item">
-
-    <!-- lockscreen credentials (contains the form) -->
-    <form  action="/ecommerce/admin/forgot/reset" method="post">
-      <input type="hidden" name="code" value="<?php echo htmlspecialchars( $code, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-      <div class="input-group">
-        <input type="password" class="form-control" placeholder="Digite a nova senha" name="password">
-        <div class="input-group-btn">
-          <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
-        </div>
-      </div>
-    </form>
-    <!-- /.lockscreen credentials -->
-
-  </div>
   <!-- /.lockscreen-item -->
-  
+  <div class="help-block text-center">
+    <div class="callout callout-success">
+      <h4>Senha Alterada!</h4>
+      <p>Tente fazer o login com sua nova senha.<br><a href="/admin/login">Clique aqui</a> para fazer o login.</p>
+    </div>
+  </div>
   <div class="lockscreen-footer text-center">
     Copyright &copy; 2014-2016 <b><a href="http://almsaeedstudio.com" class="text-black">Almsaeed Studio</a></b><br>
     All rights reserved
@@ -59,8 +44,8 @@
 <!-- /.center -->
 
 <!-- jQuery 2.2.3 -->
-<script src="/ecommerce/res/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/res/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="/ecommerce/res/admin/bootstrap/js/bootstrap.min.js"></script>
+<script src="/res/admin/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
