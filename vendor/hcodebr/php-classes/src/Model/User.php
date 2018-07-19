@@ -182,7 +182,7 @@ class User extends Model{
 		));
 	}
 
-	public static function getForgot($email) {
+	public static function getForgot($email, $inadmin = true) {
 
 		$sql = new Sql();
 
@@ -219,9 +219,16 @@ class User extends Model{
             	$code = openssl_encrypt($dataRecovery['idrecovery'], 'aes-256-cbc', User::SECRET, 0, $iv);
              	$result = base64_encode($iv.$code);
 			
-                 $link = "localhost/ecommerce/admin/forgot/reset?code=$result";
-            
-     
+				
+				if ($inadmin === true) {
+
+					$link = "localhost/ecommerce/admin/forgot/reset?code=$result";
+
+				}
+				else {
+
+					$link = "localhost/ecommerce/forgot/reset?code=$result";
+				}
 
 				$mailer = new Mailer($data["desemail"], $data["desperson"], "Redefinir senha da Hcode", "forgot", 
 					array(
@@ -243,7 +250,7 @@ class User extends Model{
      $idrecovery = openssl_decrypt($code, 'aes-256-cbc', User::SECRET, 0, $iv);
     
      $sql = new Sql();
-
+     
      $results = $sql->select("
          SELECT *
          FROM tb_userspasswordsrecoveries a
@@ -258,6 +265,7 @@ class User extends Model{
      ", array(
          ":idrecovery"=>$idrecovery
      ));
+
      if (count($results) === 0)
      {
          throw new \Exception("Não foi possível recuperar a senha.");
