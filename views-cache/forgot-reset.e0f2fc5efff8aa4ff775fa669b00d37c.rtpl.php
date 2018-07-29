@@ -1,4 +1,4 @@
-<div class="product-big-title-area">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="product-big-title-area">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -16,8 +16,8 @@
         <div class="row">                
             <div class="col-md-12">
                 <form id="login-form-wrap" class="login" method="post" action="/ecommerce/forgot/reset">
-                    <input type="hidden" name="code" value="{$code}">
-                    <h2>Olá {$name}, digite uma nova senha:</h2>
+                    <input type="hidden" name="code" value="<?php echo htmlspecialchars( $code, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <h2>Olá <?php echo htmlspecialchars( $name, ENT_COMPAT, 'UTF-8', FALSE ); ?>, digite uma nova senha:</h2>
                     <p class="form-row form-row-first">
                         <label for="password">Nova senha <span class="required">*</span>
                         </label>

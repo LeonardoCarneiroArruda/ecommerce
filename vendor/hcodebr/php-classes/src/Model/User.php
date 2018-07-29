@@ -11,6 +11,7 @@ class User extends Model{
 	const SECRET = "HcodePhp7_Secret";
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
+	const SUCCESS = "UserSuccess";
 
 	public static function getFromSession() {
 
@@ -58,7 +59,7 @@ class User extends Model{
 	public static function login($login, $password){
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array(
+		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b ON a.idperson = b.idperson WHERE deslogin = :LOGIN", array(
 			":LOGIN"=>$login
 		));
 
@@ -79,8 +80,7 @@ class User extends Model{
 
 			$_SESSION[User::SESSION] = $user->getValues();
 
-			var_dump($user)
-;		}
+		}
 		else {
 			throw new \Exception("Usuário inexistente ou senha invalida", 1);
 		}
@@ -149,7 +149,7 @@ class User extends Model{
 			":iduser"=>$iduser
 		));
 
-		$data['desperson'] = utf8_encode($data['desperson']);
+		//$data['desperson'] = utf8_encode($data['desperson']);
 
 		$this->setData($results[0]);
 	}
@@ -248,7 +248,7 @@ class User extends Model{
      $code = mb_substr($result, openssl_cipher_iv_length('aes-256-cbc'), null, '8bit');
      $iv = mb_substr($result, 0, openssl_cipher_iv_length('aes-256-cbc'), '8bit');;
      $idrecovery = openssl_decrypt($code, 'aes-256-cbc', User::SECRET, 0, $iv);
-    
+    echo $idrecovery;
      $sql = new Sql();
      
      $results = $sql->select("
@@ -314,6 +314,24 @@ class User extends Model{
  	public static function clearError() {
 
  		$_SESSION[User::ERROR] = NULL;
+ 	}
+
+ 		public static function setSuccess($msg) {
+
+ 		$_SESSION[User::SUCCESS] = $msg;
+ 	}
+
+ 	public static function getSuccess() {
+ 		$msg = (isset($_SESSION[User::SUCCESS]) && $_SESSION[User::SUCCESS]) ? $_SESSION[User::SUCCESS] : '';
+ 		
+ 		User::clearError();
+
+ 		return $msg;
+ 	}
+
+ 	public static function clearSuccess() {
+
+ 		$_SESSION[User::SUCCESS] = NULL;
  	}
 
  	public static function setErrorRegister($msg) {
