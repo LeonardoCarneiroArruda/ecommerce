@@ -5,6 +5,7 @@ use \Hcode\PageAdmin;
 use \Hcode\Model\User;
 
 $app->get("/admin/users", function() {
+	
 	User::verifyLogin();
 
 	$search = (isset($_GET['search'])) ? $_GET['search'] : "";
@@ -18,9 +19,7 @@ $app->get("/admin/users", function() {
 
 		$pagination = User::getPage($page, 3);
 	}
-
-
-
+	
 	$pages = [];
 
 	for ($x = 0; $x < $pagination['pages']; $x++) {
